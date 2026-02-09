@@ -89,6 +89,11 @@
       color: #94a3b8;
       font-size: 14px;
     }
+    .video-link {
+      color: #3b82f6;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -120,6 +125,7 @@
             <th>Durée</th>
             <th>Staff</th>
             <th>Date</th>
+            <th>Preuve Vidéo</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -131,6 +137,7 @@
             <td>Définitif</td>
             <td>AdminMax</td>
             <td>01/02/2026</td>
+            <td><span class="video-link" onclick="openVideo('https://www.youtube.com/watch?v=EXEMPLE1')">Voir vidéo</span></td>
             <td><button class="deban-btn" onclick="deban(this)">Déban</button></td>
           </tr>
           <tr>
@@ -140,6 +147,7 @@
             <td>7 jours</td>
             <td>ModoAlex</td>
             <td>05/02/2026</td>
+            <td><span class="video-link" onclick="openVideo('https://www.youtube.com/watch?v=EXEMPLE2')">Voir vidéo</span></td>
             <td><button class="deban-btn" onclick="deban(this)">Déban</button></td>
           </tr>
         </tbody>
@@ -198,6 +206,14 @@
         log.innerText = `${new Date().toLocaleString()} - ${pseudo} débanni`;
         document.getElementById('logList').appendChild(log);
       }
+    }
+
+    function openVideo(url) {
+      if (!staffConnected) {
+        alert("Accès refusé : staff uniquement");
+        return;
+      }
+      window.open(url, '_blank');
     }
   </script>
 </body>
