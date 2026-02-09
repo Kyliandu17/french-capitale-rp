@@ -19,8 +19,12 @@
       border-bottom: 2px solid #1e293b;
     }
     header h1 {
-      margin: 0;
+      margin: 10px 0 5px 0;
       font-size: 28px;
+    }
+    header img {
+      width: 200px;
+      margin-bottom: 10px;
     }
     main {
       max-width: 1100px;
@@ -67,13 +71,7 @@
       color: #f59e0b;
       font-weight: bold;
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #94a3b8;
-      font-size: 14px;
-    }
-  .deban-btn {
+    .deban-btn {
       background: #16a34a;
       color: white;
       border: none;
@@ -85,11 +83,17 @@
     .deban-btn:hover {
       background: #15803d;
     }
-
-    </style>
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
   <header>
+    <img src="https://i.imgur.com/8y6Bq5I.png" alt="French Capitale RP Logo">
     <h1>French Capitale RP</h1>
     <p>Liste officielle des sanctions (Bans)</p>
   </header>
@@ -103,48 +107,47 @@
     </div>
 
     <div id="panel" style="display:none;">
-    <div class="search">
-      <input type="text" id="searchInput" placeholder="Rechercher par pseudo, raison ou staff..." />
-    </div>
-
-    <table id="banTable">
-      <thead>
-        <tr>
-          <th>Pseudo</th>
-          <th>Type</th>
-          <th>Raison</th>
-          <th>Durée</th>
-          <th>Staff</th>
-          <th>Date</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Exemple de bans -->
-        <tr>
-          <td>Player_123</td>
-          <td class="perma">Permanent</td>
-          <td>NoRP / Troll</td>
-          <td>Définitif</td>
-          <td>AdminMax</td>
-          <td>01/02/2026</td>
-          <td><button class="deban-btn" onclick="deban(this)">Déban</button></td>
-        </tr>
-        <tr>
-          <td>JohnRP</td>
-          <td class="temp">Temporaire</td>
-          <td>Freekill</td>
-          <td>7 jours</td>
-          <td>ModoAlex</td>
-          <td>05/02/2026</td>
-          <td><button class="deban-btn" onclick="deban(this)">Déban</button></td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Rechercher par pseudo, raison ou staff..." />
       </div>
+
+      <table id="banTable">
+        <thead>
+          <tr>
+            <th>Pseudo</th>
+            <th>Type</th>
+            <th>Raison</th>
+            <th>Durée</th>
+            <th>Staff</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Player_123</td>
+            <td class="perma">Permanent</td>
+            <td>NoRP / Troll</td>
+            <td>Définitif</td>
+            <td>AdminMax</td>
+            <td>01/02/2026</td>
+            <td><button class="deban-btn" onclick="deban(this)">Déban</button></td>
+          </tr>
+          <tr>
+            <td>JohnRP</td>
+            <td class="temp">Temporaire</td>
+            <td>Freekill</td>
+            <td>7 jours</td>
+            <td>ModoAlex</td>
+            <td>05/02/2026</td>
+            <td><button class="deban-btn" onclick="deban(this)">Déban</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </main>
 
-    <section style="max-width:1100px; margin:40px auto; padding:20px; background:#020617; border-radius:8px;">
+  <section style="max-width:1100px; margin:40px auto; padding:20px; background:#020617; border-radius:8px;">
     <h3>Logs des débans</h3>
     <ul id="logList"></ul>
   </section>
@@ -154,6 +157,9 @@
   </footer>
 
   <script>
+    let staffConnected = false;
+    const STAFF_PASSWORD = "ADMIN";
+
     const searchInput = document.getElementById('searchInput');
     const tableRows = document.querySelectorAll('#banTable tbody tr');
 
@@ -164,16 +170,6 @@
         row.style.display = text.includes(value) ? '' : 'none';
       });
     });
-  function deban(button) {
-      const row = button.closest('tr');
-      const pseudo = row.children[0].innerText;
-      if (confirm(`Confirmer le déban de ${pseudo} ?`)) {
-        row.remove();
-        alert(`${pseudo} a été débanni.`);
-      }
-    }
-  let staffConnected = false;
-    const STAFF_PASSWORD = "ADMIN"; // à modifier
 
     function loginStaff() {
       const pass = document.getElementById('staffPass').value;
